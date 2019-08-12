@@ -1,0 +1,684 @@
+<% include  shared/header.ejs %>
+
+
+
+<!--===============================
+=            Hero Area            =
+================================-->
+
+<section class="hero-area bg-1 text-center overly">
+    <!-- Container Start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Header Contetnt -->
+                <div class="content-block">
+                    <h1>Want ToBuy & Go ToBuy  </h1>
+                    <p>Join the millions who buy and sell from each other everyday in local<br> communities around the world</p>
+                    <div class="short-popular-category-list text-center">
+                        <!--<h2>Popular Category</h2>-->
+                    <a href="/category" class="btn btn-white-outline">View All Products</a>
+                    <a href="/listing" class="btn btn-white-outline"style="margin-left: 5%;">Post Ads</a>
+
+                    </div>
+
+                </div>
+                <!-- Advance Search -->
+                <div class="advance-search">
+                    <form action="#">
+                        <div class="row">
+                            <!-- Store Search -->
+                            <div class="col-lg-6 col-md-12">
+                                <div class="block d-flex">
+                                    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Type something...">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="block d-flex">
+                                    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search for store">
+                                    <!-- Search Button -->
+                                    <button class="btn btn-main">SEARCH</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Container End -->
+</section>
+
+<!--===================================
+=            Client Slider            =
+====================================-->
+<div class="swiper-container-solution">
+    <div class="selected-solution">
+        <div>
+            <div class="swiper-container">
+
+                <div class="row eric-row">
+                    <div class="col-md-12">
+                        <div class="section-title">
+                            <h2>Trending Ads</h2>
+                            <p>We post the top Ads to You everyday.Like it Buy it</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="solution-cardlist swiper-wrapper">
+                    <%for(let i=0;i<Listings.length;i++){%>
+                    <div class="col-lg-4 col-md-6 col-sm-12 swiper-slide" style="padding-bottom: 5%;">
+                        <div class="card" style="width:100%;">
+                            <a style="height: 220px;overflow: hidden" href="/<%=Listings[i]._id%>/listingDetails"><img class="card-img-top"  src="/images/user/<%=Listings[i].image%>" alt="Card image cap"></a>
+                            <div class="card-body" style="height:175px;overflow:hidden;">
+                                <h5 class="card-title"><%=Listings[i].name%></h5>
+                                <%if(Listings[i].username.avatar){%>
+                                <a href="/<%=Listings[i].username._id%>/collection"> <p><img src="/images/user/<%=Listings[i].username.avatar%>" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;"><%=Listings[i].username.displayName%></p></a>
+                                <%}else{%>
+                                <a href="/<%=Listings[i].username._id%>/collection"> <p><img src="/images/user/avatar-tobuy.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;"><%=Listings[i].username.displayName%></p></a>
+                                <%}%>
+                                <p class="card-text"><%-Listings[i].description%></p>
+                            </div>
+                            <div class="card-body" style="padding: 0 1.25em 1.25em 1.25em;">
+                                <div class="row" style="padding-top:5%">
+                                    <div class="col-6">
+                                        <a href="#" class="card-link addhide"><i class="fas fa-dollar-sign"></i> <%=Listings[i].SellPrice%></a>
+                                    </div>
+                                    <div class="col-6 " >
+                                        <%if(user){%>
+
+                                        <%if(ftlistings.length>0){%>
+                                        <%let y=0;let n=0%>
+                                        <%for(let x = 0;x<ftlistings.length; x++){%>
+
+                                        <%if(ftlistings[x]==Listings[i]._id){%>
+                                        <%y++%>
+                                        <!--<i class="fas fa-heart" style="color: red;"></i><%=Listings[i].love.length%>Y-->
+
+                                        <%}else{%>
+                                        <%n++%>
+                                        <!--<a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"></i></a><%=Listings[i].love.length%>Not-->
+                                        <%}%>
+                                        <%}%>
+                                        <%if(y>0){%>
+                                        <i class="fas fa-heart" style="color: red;"></i> <%=Listings[i].love.length%>
+
+                                        <%}else{ %>
+                                        <a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"><%=Listings[i].love.length%></i> </a>
+                                        <i class="fas fa-heart eric-hide-love<%=i%>" style="color: red;display: none;"> <%=Listings[i].love.length+1%></i>
+                                        <%}%>
+                                        <%}else{%>
+
+                                        <a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"><%=Listings[i].love.length%></i></a>
+                                        <%}%>
+
+
+                                        <!--<else of user>-->
+                                        <%}else{%>
+                                        <i class="far fa-heart" style="color: red"></i><%=Listings[i].love.length%>
+                                        <%}%>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+                    <!--<div class="col-sm-4 swiper-slide">-->
+                        <!--<div class="card" style="width:100%">-->
+                            <!--<img class="card-img-top" src="/images/tech1.jpg" alt="Card image cap">-->
+                            <!--<div class="card-body">-->
+                                <!--<h5 class="card-title">Card title</h5>-->
+                                <!--<a href="#"> <p><img src="/images/tech1.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;">RICH</p></a>-->
+                                <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                            <!--</div>-->
+                            <!--<div class="card-body">-->
+                                <!--<div class="row">-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-dollar-sign"></i>15</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-heart" style="color: red"></i>89</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--<div class="col-sm-4 swiper-slide">-->
+                        <!--<div class="card" style="width:100%">-->
+                            <!--<img class="card-img-top" src="/images/tech1.jpg" alt="Card image cap">-->
+                            <!--<div class="card-body">-->
+                                <!--<h5 class="card-title">Card title</h5>-->
+                                <!--<a href="#"> <p><img src="/images/tech1.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;">RICH</p></a>-->
+                                <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                            <!--</div>-->
+                            <!--<div class="card-body">-->
+                                <!--<div class="row">-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-dollar-sign"></i>15</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-heart" style="color: red"></i>89</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-4 swiper-slide">-->
+                        <!--<div class="card" style="width:100%">-->
+                            <!--<img class="card-img-top" src="/images/tech1.jpg" alt="Card image cap">-->
+                            <!--<div class="card-body">-->
+                                <!--<h5 class="card-title">Card title</h5>-->
+                                <!--<a href="#"> <p><img src="/images/tech1.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;">RICH</p></a>-->
+                                <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                            <!--</div>-->
+                            <!--<div class="card-body">-->
+                                <!--<div class="row">-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-dollar-sign"></i>15</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-heart" style="color: red"></i>89</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--<div class="col-sm-4 swiper-slide">-->
+                        <!--<div class="card" style="width:100%">-->
+                            <!--<img class="card-img-top" src="/images/tech1.jpg" alt="Card image cap">-->
+                            <!--<div class="card-body">-->
+                                <!--<h5 class="card-title">Card title</h5>-->
+                                <!--<a href="#"> <p><img src="/images/tech1.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;">RICH</p></a>-->
+                                <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                            <!--</div>-->
+                            <!--<div class="card-body">-->
+                                <!--<div class="row">-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-dollar-sign"></i>15</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-heart" style="color: red"></i>89</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-4 swiper-slide">-->
+                        <!--<div class="card" style="width:100%">-->
+                            <!--<img class="card-img-top" src="/images/tech1.jpg" alt="Card image cap">-->
+                            <!--<div class="card-body">-->
+                                <!--<h5 class="card-title">Card title</h5>-->
+                                <!--<a href="#"> <p><img src="/images/tech1.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;">RICH</p></a>-->
+                                <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                            <!--</div>-->
+                            <!--<div class="card-body">-->
+                                <!--<div class="row">-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-dollar-sign"></i>15</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-heart" style="color: red"></i>89</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-4 swiper-slide">-->
+                        <!--<div class="card" style="width:100%">-->
+                            <!--<img class="card-img-top" src="/images/tech1.jpg" alt="Card image cap">-->
+                            <!--<div class="card-body">-->
+                                <!--<h5 class="card-title">Card title</h5>-->
+                                <!--<a href="#"> <p><img src="/images/tech1.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;">RICH</p></a>-->
+                                <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                            <!--</div>-->
+                            <!--<div class="card-body">-->
+                                <!--<div class="row">-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-dollar-sign"></i>15</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-heart" style="color: red"></i>89</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--<div class="col-sm-4 swiper-slide">-->
+                        <!--<div class="card" style="width:100%">-->
+                            <!--<img class="card-img-top" src="/images/tech1.jpg" alt="Card image cap">-->
+                            <!--<div class="card-body">-->
+                                <!--<h5 class="card-title">Card title</h5>-->
+                                <!--<a href="#"> <p><img src="/images/tech1.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;">RICH</p></a>-->
+                                <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                            <!--</div>-->
+                            <!--<div class="card-body">-->
+                                <!--<div class="row">-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-dollar-sign"></i>15</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-6">-->
+                                        <!--<a href="#" class="card-link"><i class="fas fa-heart" style="color: red"></i>89</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="swiper-pagination solution-pagination"></div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+</div>
+
+<!--===========================================
+=            Popular deals section            =
+============================================-->
+
+<section class="popular-deals section bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2>Trending Ads</h2>
+                    <p>We post the top Ads to You everyday.Like it Buy it</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <!-- offer 01 -->
+            <%for(let i=0;i<Listings.length;i++){%>
+            <div class="col-lg-4 col-md-6 col-sm-12 swiper-slide" style="padding-bottom: 5%;">
+                <div class="card" style="width:100%;">
+                    <a style="height: 220px;overflow: hidden" href="/<%=Listings[i]._id%>/listingDetails"><img class="card-img-top"  src="/images/user/<%=Listings[i].image%>" alt="Card image cap"></a>
+                    <div class="card-body" style="height:175px;overflow:hidden;">
+                        <h5 class="card-title"><%=Listings[i].name%></h5>
+                        <%if(Listings[i].username.avatar){%>
+                        <a href="/<%=Listings[i].username._id%>/collection"> <p><img src="/images/user/<%=Listings[i].username.avatar%>" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;"><%=Listings[i].username.displayName%></p></a>
+                        <%}else{%>
+                        <a href="/<%=Listings[i].username._id%>/collection"> <p><img src="/images/user/avatar-tobuy.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;"><%=Listings[i].username.displayName%></p></a>
+                        <%}%>
+                        <p class="card-text"><%-Listings[i].description%></p>
+                    </div>
+                    <div class="card-body" style="padding: 0 1.25em 1.25em 1.25em;">
+                        <div class="row" style="padding-top:5%">
+                            <div class="col-6">
+                                <a href="#" class="card-link addhide"><i class="fas fa-dollar-sign"></i> <%=Listings[i].SellPrice%></a>
+                            </div>
+                            <div class="col-6 " >
+                                <%if(user){%>
+
+                                <%if(ftlistings.length>0){%>
+                                <%let y=0;let n=0%>
+                                <%for(let x = 0;x<ftlistings.length; x++){%>
+
+                                <%if(ftlistings[x]==Listings[i]._id){%>
+                                <%y++%>
+                                <!--<i class="fas fa-heart" style="color: red;"></i><%=Listings[i].love.length%>Y-->
+
+                                <%}else{%>
+                                <%n++%>
+                                <!--<a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"></i></a><%=Listings[i].love.length%>Not-->
+                                <%}%>
+                                <%}%>
+                                <%if(y>0){%>
+                                <i class="fas fa-heart" style="color: red;"></i> <%=Listings[i].love.length%>
+
+                                <%}else{ %>
+                                <a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"><%=Listings[i].love.length%></i> </a>
+                                <i class="fas fa-heart eric-hide-love<%=i%>" style="color: red;display: none;"> <%=Listings[i].love.length+1%></i>
+                                <%}%>
+                                <%}else{%>
+
+                                <a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"><%=Listings[i].love.length%></i></a>
+                                <%}%>
+
+
+                                <!--<else of user>-->
+                                <%}else{%>
+                                <i class="far fa-heart" style="color: red"></i><%=Listings[i].love.length%>
+                                <%}%>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+        </div>
+    </div>
+</section>
+
+
+
+<!--==========================================
+=            All Category Section            =
+===========================================-->
+
+<!--<section class=" section">-->
+    <!--&lt;!&ndash; Container Start &ndash;&gt;-->
+    <!--<div class="container">-->
+        <!--<div class="row">-->
+            <!--<div class="col-12">-->
+                <!--&lt;!&ndash; Section title &ndash;&gt;-->
+                <!--<div class="section-title">-->
+                    <!--<h2>All Categories</h2>-->
+                    <!--<p>We do all things for you! Like It, Buy it</p>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--&lt;!&ndash; Category list &ndash;&gt;-->
+                    <!--<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">-->
+                        <!--<div class="category-block">-->
+                            <!--<div class="header">-->
+                                <!--<i class="fa fa-laptop icon-bg-1"></i>-->
+                                <!--<h4>Electronics</h4>-->
+                            <!--</div>-->
+                            <!--<ul class="category-list" >-->
+                                <!--<li><a href="category.html">Laptops <span>93</span></a></li>-->
+                                <!--<li><a href="category.html">Iphone <span>233</span></a></li>-->
+                                <!--<li><a href="category.html">Microsoft  <span>183</span></a></li>-->
+                                <!--<li><a href="category.html">Monitors <span>343</span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div> &lt;!&ndash; /Category List &ndash;&gt;-->
+                    <!--&lt;!&ndash; Category list &ndash;&gt;-->
+                    <!--<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">-->
+                        <!--<div class="category-block">-->
+                            <!--<div class="header">-->
+                                <!--<i class="fas fa-utensils icon-bg-2"></i>-->
+                                <!--<h4>Restaurants</h4>-->
+                            <!--</div>-->
+                            <!--<ul class="category-list" >-->
+                                <!--<li><a href="category.html">Cafe <span>393</span></a></li>-->
+                                <!--<li><a href="category.html">Fast food <span>23</span></a></li>-->
+                                <!--<li><a href="category.html">Restaurants  <span>13</span></a></li>-->
+                                <!--<li><a href="category.html">Food Track<span>43</span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div> &lt;!&ndash; /Category List &ndash;&gt;-->
+                    <!--&lt;!&ndash; Category list &ndash;&gt;-->
+                    <!--<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">-->
+                        <!--<div class="category-block">-->
+                            <!--<div class="header">-->
+                                <!--<i class="fa fa-home icon-bg-3"></i>-->
+                                <!--<h4>Real Estate</h4>-->
+                            <!--</div>-->
+                            <!--<ul class="category-list" >-->
+                                <!--<li><a href="category.html">Farms <span>93</span></a></li>-->
+                                <!--<li><a href="category.html">Gym <span>23</span></a></li>-->
+                                <!--<li><a href="category.html">Hospitals  <span>83</span></a></li>-->
+                                <!--<li><a href="category.html">Parolurs <span>33</span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div> &lt;!&ndash; /Category List &ndash;&gt;-->
+                    <!--&lt;!&ndash; Category list &ndash;&gt;-->
+                    <!--<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">-->
+                        <!--<div class="category-block">-->
+                            <!--<div class="header">-->
+                                <!--<i class="fa fa-shopping-basket icon-bg-4"></i>-->
+                                <!--<h4>Shoppings</h4>-->
+                            <!--</div>-->
+                            <!--<ul class="category-list" >-->
+                                <!--<li><a href="category.html">Mens Wears <span>53</span></a></li>-->
+                                <!--<li><a href="category.html">Accessories <span>212</span></a></li>-->
+                                <!--<li><a href="category.html">Kids Wears <span>133</span></a></li>-->
+                                <!--<li><a href="category.html">It & Software <span>143</span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div> &lt;!&ndash; /Category List &ndash;&gt;-->
+                    <!--&lt;!&ndash; Category list &ndash;&gt;-->
+                    <!--<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">-->
+                        <!--<div class="category-block">-->
+                            <!--<div class="header">-->
+                                <!--<i class="fa fa-briefcase icon-bg-5"></i>-->
+                                <!--<h4>Jobs</h4>-->
+                            <!--</div>-->
+                            <!--<ul class="category-list" >-->
+                                <!--<li><a href="category.html">It Jobs <span>93</span></a></li>-->
+                                <!--<li><a href="category.html">Cleaning & Washing <span>233</span></a></li>-->
+                                <!--<li><a href="category.html">Management  <span>183</span></a></li>-->
+                                <!--<li><a href="category.html">Voluntary Works <span>343</span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div> &lt;!&ndash; /Category List &ndash;&gt;-->
+                    <!--&lt;!&ndash; Category list &ndash;&gt;-->
+                    <!--<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">-->
+                        <!--<div class="category-block">-->
+                            <!--<div class="header">-->
+                                <!--<i class="fa fa-car icon-bg-6"></i>-->
+                                <!--<h4>Vehicles</h4>-->
+                            <!--</div>-->
+                            <!--<ul class="category-list" >-->
+                                <!--<li><a href="category.html">Bus <span>193</span></a></li>-->
+                                <!--<li><a href="category.html">Cars <span>23</span></a></li>-->
+                                <!--<li><a href="category.html">Motobike  <span>33</span></a></li>-->
+                                <!--<li><a href="category.html">Rent a car <span>73</span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div> &lt;!&ndash; /Category List &ndash;&gt;-->
+                    <!--&lt;!&ndash; Category list &ndash;&gt;-->
+                    <!--<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">-->
+                        <!--<div class="category-block">-->
+                            <!--<div class="header">-->
+                                <!--<i class="fa fa-paw icon-bg-7"></i>-->
+                                <!--<h4>Pets</h4>-->
+                            <!--</div>-->
+                            <!--<ul class="category-list" >-->
+                                <!--<li><a href="category.html">Cats <span>65</span></a></li>-->
+                                <!--<li><a href="category.html">Dogs <span>23</span></a></li>-->
+                                <!--<li><a href="category.html">Birds  <span>113</span></a></li>-->
+                                <!--<li><a href="category.html">Others <span>43</span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div> &lt;!&ndash; /Category List &ndash;&gt;-->
+                    <!--&lt;!&ndash; Category list &ndash;&gt;-->
+                    <!--<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">-->
+                        <!--<div class="category-block">-->
+                            <!--<div class="header">-->
+                                <!--<i class="fa fa-laptop icon-bg-8"></i>-->
+                                <!--<h4>Services</h4>-->
+                            <!--</div>-->
+                            <!--<ul class="category-list" >-->
+                                <!--<li><a href="category.html">Cleaning <span>93</span></a></li>-->
+                                <!--<li><a href="category.html">Car Washing <span>233</span></a></li>-->
+                                <!--<li><a href="category.html">Clothing  <span>183</span></a></li>-->
+                                <!--<li><a href="category.html">Business <span>343</span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div> &lt;!&ndash; /Category List &ndash;&gt;-->
+
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; Container End &ndash;&gt;-->
+<!--</section>-->
+
+<!--&lt;!&ndash;================================-->
+<!--START LATEST NEWS-->
+<!--=================================&ndash;&gt;-->
+<!--<section class="latest-news section&#45;&#45;padding">-->
+    <!--&lt;!&ndash; start /.container &ndash;&gt;-->
+    <!--<div class="container">-->
+        <!--&lt;!&ndash; start row &ndash;&gt;-->
+        <!--<div class="row">-->
+            <!--&lt;!&ndash; start col-md-12 &ndash;&gt;-->
+            <!--<div class="col-md-12">-->
+                <!--<div class="section-title">-->
+                    <!--<h1>Latest-->
+                        <!--<span class="highlighted" >News</span>-->
+                    <!--</h1>-->
+                    <!--<p>See our weekly news. We will post our update every week.Please Subscribe us.</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; end /.col-md-12 &ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash; end /.row &ndash;&gt;-->
+
+        <!--&lt;!&ndash; start .row &ndash;&gt;-->
+        <!--<div class="row">-->
+            <!--&lt;!&ndash; start .col-md-4 &ndash;&gt;-->
+            <!--<div class="col-lg-4 col-md-6">-->
+                <!--<div class="news">-->
+                    <!--<div class="news__thumbnail">-->
+                        <!--<img src="images/shipinjiankong.jpg" alt="News Thumbnail">-->
+                    <!--</div>-->
+                    <!--<div class="news__content">-->
+                        <!--<a href="/" class="news-title">-->
+                            <!--<h4>Web Design Trends in 2019</h4>-->
+                        <!--</a>-->
+                        <!--<p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,-->
+                            <!--leo quam aliquet congue.</p>-->
+                    <!--</div>-->
+                    <!--<div class="news__meta">-->
+                        <!--<div class="date">-->
+                            <!--<i class="far fa-clock"><p>24 Feb 2019</p></i>-->
+
+                        <!--</div>-->
+
+                        <!--<div class="other">-->
+                            <!--<ul>-->
+                                <!--<li>-->
+                                    <!--<i class="far fa-comments"><span>45</span></i>-->
+
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<i class="far fa-eye"><span>345</span></i>-->
+
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; end /.col-md-4 &ndash;&gt;-->
+
+            <!--&lt;!&ndash; start .col-md-4 &ndash;&gt;-->
+            <!--<div class="col-lg-4 col-md-6">-->
+                <!--<div class="news">-->
+                    <!--<div class="news__thumbnail">-->
+                        <!--<img src="images/zhihuitingche.jpg" alt="News Thumbnail">-->
+                    <!--</div>-->
+                    <!--<div class="news__content">-->
+                        <!--<a href="#" class="news-title">-->
+                            <!--<h4>The best advices to start your own project</h4>-->
+                        <!--</a>-->
+                        <!--<p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,-->
+                            <!--leo quam aliquet congue.</p>-->
+                    <!--</div>-->
+                    <!--<div class="news__meta">-->
+                        <!--<div class="date">-->
+                            <!--<i class="far fa-clock"><p>15 Mar 2019</p></i>-->
+
+                        <!--</div>-->
+
+                        <!--<div class="other">-->
+                            <!--<ul>-->
+                                <!--<li>-->
+                                    <!--<i class="far fa-comments">  <span>45</span></i>-->
+
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<i class="far fa-eye"><span>345</span></i>-->
+
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; end /.col-md-4 &ndash;&gt;-->
+
+            <!--&lt;!&ndash; start .col-md-4 &ndash;&gt;-->
+            <!--<div class="col-lg-4 col-md-6">-->
+                <!--<div class="news">-->
+                    <!--<div class="news__thumbnail">-->
+                        <!--<img src="images/zhihuijiaoyu.jpg" alt="News Thumbnail">-->
+                    <!--</div>-->
+                    <!--<div class="news__content">-->
+                        <!--<a href="#" class="news-title">-->
+                            <!--<h4>Best Tomato Sauce in town</h4>-->
+                        <!--</a>-->
+                        <!--<p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,-->
+                            <!--leo quam aliquet congue.</p>-->
+                    <!--</div>-->
+                    <!--<div class="news__meta">-->
+                        <!--<div class="date">-->
+                            <!--<i class="far fa-clock">  <p>20 Dec 2016</p></i>-->
+
+                        <!--</div>-->
+
+                        <!--<div class="other">-->
+                            <!--<ul>-->
+                                <!--<li>-->
+                                    <!--<i class="far fa-comments"><span>45</span></i>-->
+
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<i class="far fa-eye"><span>345</span></i>-->
+
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; end /.col-md-4 &ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash; end /.row &ndash;&gt;-->
+    <!--</div>-->
+    <!--&lt;!&ndash; end /.container &ndash;&gt;-->
+    <!--<div class="more-product">-->
+        <!--<a class="btn btn-main">  See more </a>-->
+    <!--</div>-->
+<!--</section>-->
+<!--================================
+END LATEST NEWS
+=================================-->
+<!--================================
+      START CALL TO ACTION AREA
+  =================================-->
+<section class="call-to-action bgimage" >
+    <div class="bg_image_holder" >
+        <img src="images/tech1.jpg" alt="">
+    </div>
+    <div class="container content_above">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call-to-wrap">
+                    <h1 class="text--white">Ready to Join Our Marketplace!</h1>
+                    <h4 class="text--white">Over 25,000 People Join and trust Like buy.</h4>
+                    <a href="#" class="btn btn-white" style="margin-top: 5%;">Join Us Today</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================================
+    END CALL TO ACTION AREA
+=================================-->
+
+<!--============================
+=            Footer            =
+=============================-->
+
+
+
+<% include shared/footer.ejs %>
+
+

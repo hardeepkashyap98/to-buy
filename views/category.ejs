@@ -1,0 +1,129 @@
+<% include  shared/header.ejs %>
+
+<section style="  background: linear-gradient(-45deg,#24ff72,#9a4eff);padding-top: 3%; padding-bottom: 2.5%;">
+    <div class="container">
+        <div>
+            <nav aria-label="breadcrumb" >
+                <ol class="breadcrumb" style="background: none;">
+                    <%if(Category){%>
+                    <li class="breadcrumb-item" ><a href="/"style="color: white!important;" >Home</a></li>
+                    <li class="breadcrumb-item" ><a href="/category"style="color: white!important;" >Category</a></li>
+                    <li class="breadcrumb-item active" style="color:#082de1;" aria-current="page"><a><%=Category%></a></li>
+
+                    <%}else{%>
+                    <li class="breadcrumb-item" ><a href="/"style="color: white!important;" >Home</a></li>
+                    <li class="breadcrumb-item active" style="color:#082de1;" aria-current="page"><a>Categories</a></li>
+
+                    <%}%>
+                </ol>
+            </nav>
+            <form action="/search" method="post" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 eric-search" name="Search"type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-main my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</section>
+<div style="padding-top: 5%;">
+    <div class="container">
+        <div class="row" style="    padding-bottom: 5%;">
+            <div class="col-lg-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body" style="border-bottom: 1px solid #d6d4d4;">
+                            <a  href="#" class="eric-hide-btn">
+                            <div class="row ">
+                                <div class="col-9 "> <h3 class="card-title">Categories </h3></div>
+                                <div class="col-3 "> <i class="fas fa-chevron-down"></i></div>
+                            </div>
+                            </a>
+                        </div>
+                        <ul class="list-group list-group-flush eric-hide-item">
+                            <li class="list-group-item" style="border:none;"> <a  href="/categoryOne/Electronics"><i class="fas fa-laptop-medical" style="padding-right:15%; color:#082de1;"></i>Electronics</a></li>
+                            <li class="list-group-item" style="border:none;"> <a  href="/categoryOne/Restaurants"><i class="fas fa-utensils"       style="padding-right:15%; color:#082de1;"></i> Restaurants</a> </li>
+                            <li class="list-group-item" style="border:none;"> <a  href="/categoryOne/Shoppings"><i class="fas fa-store"          style="padding-right:15%; color:#082de1;"></i></i>Shoppings</a>   </li>
+                            <li class="list-group-item" style="border:none;"> <a  href="/categoryOne/Vehicles"><i class="fas fa-car"            style="padding-right:15%; color:#082de1;"></i>Vehicles</a>    </li>
+                            <li class="list-group-item" style="border:none;"> <a  href="/categoryOne/Pets"><i class="fas fa-paw"            style="padding-right:15%; color:#082de1;"></i>Pets</a>        </li>
+                            <li class="list-group-item" style="border:none;"> <a  href="/categoryOne/Services"><i class="fas fa-phone-volume"   style="padding-right:15%; color:#082de1;"></i>Services</a>    </li>
+                            <li class="list-group-item" style="border:none;"> <a  href="/categoryOne/Real Estate"><i class="fas fa-receipt"        style="padding-right:15%; color:#082de1;"></i>Real Estate</a> </li>
+                            <li class="list-group-item" style="border:none;"> <a  href="/categoryOne/Others"><i class="fas fa-feather-alt"        style="padding-right:15%; color:#082de1;"></i>Others</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-9">
+            <div class="row">
+                <%for(let i=0;i<Listings.length;i++){%>
+                <div class="col-lg-4 col-md-6 col-sm-12" style="padding-bottom: 5%;">
+                    <div class="card" style="width:100%;">
+                        <a style="height: 220px;overflow: hidden" href="/<%=Listings[i]._id%>/listingDetails"><img class="card-img-top"  src="/images/user/<%=Listings[i].image%>" alt="Card image cap"></a>
+                        <div class="card-body" style="height:175px;overflow:hidden;">
+                            <h5 class="card-title"><%=Listings[i].name%></h5>
+                            <%if(Listings[i].username.avatar){%>
+                            <a href="/<%=Listings[i].username._id%>/collection"> <p><img src="/images/user/<%=Listings[i].username.avatar%>" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;"><%=Listings[i].username.displayName%></p></a>
+                            <%}else{%>
+                            <a href="/<%=Listings[i].username._id%>/collection"> <p><img src="/images/user/avatar-tobuy.jpg" style="width: 30px;height: 30px; border-radius: 50%;margin-right: 5%;"><%=Listings[i].username.displayName%></p></a>
+                            <%}%>
+                            <p class="card-text"><%-Listings[i].description%></p>
+                        </div>
+                        <div class="card-body" style="padding: 0 1.25em 1.25em 1.25em;">
+                            <div class="row" style="padding-top:5%">
+                                <div class="col-6">
+                                    <a href="#" class="card-link addhide"><i class="fas fa-dollar-sign"></i> <%=Listings[i].SellPrice%></a>
+                                </div>
+                                <div class="col-6 " >
+                                    <%if(user){%>
+
+                                    <%if(ftlistings.length>0){%>
+                                      <%let y=0;let n=0%>
+                                    <%for(let x = 0;x<ftlistings.length; x++){%>
+
+                                    <%if(ftlistings[x]==Listings[i]._id){%>
+                                    <%y++%>
+                                    <!--<i class="fas fa-heart" style="color: red;"></i><%=Listings[i].love.length%>Y-->
+
+                                    <%}else{%>
+                                    <%n++%>
+                                    <!--<a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"></i></a><%=Listings[i].love.length%>Not-->
+                                    <%}%>
+                                    <%}%>
+                                    <%if(y>0){%>
+                                    <i class="fas fa-heart" style="color: red;"></i> <%=Listings[i].love.length%>
+
+                                    <%}else{ %>
+                                    <a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"><%=Listings[i].love.length%></i> </a>
+                                    <i class="fas fa-heart eric-hide-love<%=i%>" style="color: red;display: none;"> <%=Listings[i].love.length+1%></i>
+                                    <%}%>
+                                    <%}else{%>
+
+                                    <a href="/<%=Listings[i]._id%>/addToFavourite/<%=user._id%>" class="card-link addFT"><i class="fas fa-heart" style="color: blue"><%=Listings[i].love.length%></i></a>
+                                    <%}%>
+
+
+                                     <!--<else of user>-->
+                                    <%}else{%>
+                                    <i class="far fa-heart" style="color: red"></i><%=Listings[i].love.length%>
+                                    <%}%>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<% include shared/footer.ejs %>

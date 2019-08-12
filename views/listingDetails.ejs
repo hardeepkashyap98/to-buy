@@ -1,0 +1,228 @@
+<% include  shared/header.ejs %>
+
+<!--==================================
+=            User Profile            =
+===================================-->
+<section style="  background: linear-gradient(-45deg,#24ff72,#9a4eff);padding-top: 3%; padding-bottom: 2.5%;">
+    <div class="container">
+        <div>
+            <nav aria-label="breadcrumb" >
+                <ol class="breadcrumb" style="background: none;">
+                    <li class="breadcrumb-item" ><a href="/"style="color: white!important;" >Home</a></li>
+                    <li class="breadcrumb-item active" style="color:#082de1;" aria-current="page"><a>Listinng Details</a></li>
+
+                </ol>
+            </nav>
+            <h1 style="padding-left: 1.5%;color: white;"><%=listing.name%></h1>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <%if(error&&error.length>0){%>
+    <div class="alert alert-danger" role="alert">
+       <%=error%>
+    </div>
+    <%}%>
+    <%if(success&&success.length>0){%>
+    <div class="alert alert-success" role="alert">
+        <%=success%>
+    </div>
+    <%}%>
+    <p></p>
+    <div class="row">
+        <div class="col-lg-9 col-sm-12" style=" padding-top: 5%">
+
+            <div class="row" style="position:relative;overflow: hidden; box-shadow: 0 3px 10px rgba(121, 135, 150, 0.1);">
+                <div class="container" style="max-height: 750px;overflow: hidden;">
+                <img style="width: 100%;" src="../images/user/<%=listing.image%>">
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 5%;position:relative;">
+                <div class="container">
+                    <a class="btn btn-red-sm"data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"style="float: right;margin-right: 5%">Make an offer <i style="color:#ef6565" class="fas fa-coffee"></i></a>
+
+                    <!--<%if(user ){%>-->
+                    <!--<%if(listing.love.length>0){%>-->
+                    <!--<%let y=0;let n=0%>-->
+                    <!--<%for(let x =0;x<listing.love.length;x++){%>-->
+                    <!--<%if(listing.love[x].userId == user._id ){%>-->
+                    <!--<%y++%>-->
+                    <!--<%}%>-->
+                    <!--<%n++%>-->
+                    <!--<%}%>-->
+
+                    <!--<%if(y>0){%>-->
+
+
+                    <!--<a class="btn btn-red-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="float: right;margin-right: 5%">Make an offer <i class="fas fa-heart"></i></a>-->
+                    <!--<%}else {%>-->
+                    <!--<a class="btn btn-red-sm"data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="float: right;margin-right: 5%">Make an offer <i style="color:#ef6565" class="fas fa-coffee"></i></a>-->
+                    <!--<a href="/<%=listing._id%>/addToFavourite/<%=user._id%>"  style="float: right;margin-right: 5%"><i class="fas fa-heart"></i></a>-->
+                    <!--<%}%>-->
+                    <!--<%}else {%>-->
+                    <!--<a class="btn btn-red-sm"data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="float: right;margin-right: 5%">Make an offer <i style="color:#ef6565" class="fas fa-coffee"></i></a>-->
+                    <!--<a href="/<%=listing._id%>/addToFavourite/<%=user._id%>"  style="float: right;margin-right: 5%"> <i class="fas fa-heart"></i></a>-->
+                    <!--<%}%>-->
+                    <!--<%}else {%>-->
+                    <!--<a class="btn btn-red-sm"data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"style="float: right;margin-right: 5%">Make an offer <i style="color:#ef6565" class="fas fa-coffee"></i></a>-->
+                    <!--<%}%>-->
+                </div>
+            </div>
+
+            <div  style="position:relative;width:100%;overflow: hidden;margin-top:5%;margin-bottom: 10%; box-shadow: 0 3px 10px rgba(121, 135, 150, 0.1);">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#descreption" role="tab" aria-controls="home" aria-selected="true">Descreption</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Specifications" role="tab" aria-controls="Specifications" aria-selected="false">Specifications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Review" role="tab" aria-controls="Review" aria-selected="false">Review</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                    <div style="padding: 0 5% 5% 5%" class="tab-pane fade show active" id="descreption" role="tabpanel" aria-labelledby="home-tab">
+                      <div style="margin-top: 5%;margin-bottom: 5%;"> <%-listing.description%> </div>
+                    </div>
+                    <div style="padding: 0 5% 5% 5%" class="tab-pane fade" id="Specifications" role="tabpanel" aria-labelledby="profile-tab">
+                        <h5 style="border-bottom: 1px solid #ebebeb;margin-top: 5%; ">Name：<p style="float: right;color: black"><%=listing.name%> </p></h5>
+                        <h5 style="border-bottom: 1px solid #ebebeb; ">Original Price：<p style="float: right;color: black"><%=listing.price%></p></h5>
+                        <h5 style="border-bottom: 1px solid #ebebeb; ">Sell Price ：<p style="float: right;color: black"><%=listing.SellPrice%></p></h5>
+                        <h5 style="border-bottom: 1px solid #ebebeb; ">Condition：<p style="float: right;color: black"><%=listing.condition%></p></h5>
+                        <h5 style="border-bottom: 1px solid #ebebeb; ">Brand：<p style="float: right;color: black"><%=listing.Brand%></p></h5>
+                        <h5 style="border-bottom: 1px solid #ebebeb; ">Category：<p style="float: right;color: black"><%=listing.category%></p></h5>
+                        <h5 style="margin-bottom: 2%">Post Date：<p style="float: right;color: black"><%=date.format(listing.timeStamp,'YYYY/MM/DD HH:mm:ss')%></p></h5>
+
+                    </div>
+                    <div style="padding: 0 5% 5% 5%" class="tab-pane fade" id="Review" role="tabpanel" aria-labelledby="contact-tab">
+                        <div>
+                            <h2 style="padding-top: 5%;">Product Review</h2>
+                        </div>
+                        <div style="border:1px solid #ebebeb;margin-top: 2%;margin-bottom: 2%"></div>
+                        <div class="row" >
+                            <form method="post" style="width: 100%" action="/<%=listing._id%>/review">
+                              <textarea style="width: 100%; min-height: 50px;border-radius: 10px " name="review" placeholder=" Type something..."></textarea>
+                                <button class="btn btn-main-sm" style="margin-top: 5%;margin-bottom:5%;float: right;">Submit</button>
+                            </form>
+
+                        </div>
+
+                        <%for(let i =0;i<listing.review.length;i++){%>
+                        <div class="row" style="margin-top: 2%" >
+                            <div class="col-1"  >
+                                <img class="text-center" style="width: 50px; border-radius: 50%" src="../images/user/<%=listing.review[i].userAvatar%>">
+
+                            </div>
+                            <div class="col-11">
+                                <small class="text-left">
+                                    <p style="margin-top: 2%"><span style="color: black"><%=listing.review[i].username%> </span><%=date.format(listing.review[i].timeStamp,'YYYY/MM/DD HH:mm:ss')%></p>
+                                </small>
+                               <h5 style="color: black">  <%=listing.review[i].message%></h5>
+                                <p class="text-right"></p>
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-12" style=" padding-top: 5%">
+            <div class="container">
+                    <div class="sidebar">
+                        <!-- User Widget -->
+                        <div class="widget user-dashboard-profile">
+                            <!-- User Image -->
+                            <h3 style="color:blue">Seller</h3>
+                            <div class="profile-thumb" >
+                                <%if(listing.username.avatar){%>
+                                <a href="/<%=listing.username._id%>/collection"><img id="blah" src="../images/user/<%=listing.username.avatar%>" class="rounded-circle"> </a>
+                                <%}else{%>
+                                <a href="/<%=listing.username._id%>/collection"> <img id="blah" src="../images/user/avatar-tobuy.jpg" class="rounded-circle"></a>
+                                <%}%>
+                            </div>
+                            <h5 class="text-center"><%=listing.username.displayName%></h5>
+                            <p>Joined July 06, 2019</p>
+                            <a class="btn btn-main-sm"data-toggle="modal" data-target="#contactform" data-whatever="@mdo"style="">Conntact <i style="color:#ef6565" class="fas fa-coffee"></i></a>
+                            <!--<a class="btn btn-red-sm"data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"style="float: right;margin-right: 5%">Make an offer <i style="color:#ef6565" class="fas fa-coffee"></i></a>-->
+
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Make Your Offer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post"  >
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Price:</label>
+                        <input type="number" name="price" class="form-control" id="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" name="message" id="message" style="min-height: 150px"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-red-outline-sm" data-dismiss="modal">Close</button>
+                        <button  class="btn btn-main-sm">Send Offer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="contactform" tabindex="-1" role="dialog" aria-labelledby="contactform" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contact Me</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post"  action="/<%=listing._id%>/<%=listing.username.username%>/contact2">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Title:</label>
+                        <input  name="title" class="form-control" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Email:</label>
+                        <input class="form-control"type="email" name="email" id="email" >
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" name="message" id="message" style="min-height: 150px"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-red-outline-sm" data-dismiss="modal">Close</button>
+                        <button  class="btn btn-main-sm">Send Offer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--============================
+=            Footer            =
+=============================-->
+
+
+<% include shared/footer.ejs %>

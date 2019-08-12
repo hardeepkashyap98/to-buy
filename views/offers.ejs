@@ -1,0 +1,137 @@
+<% include  shared/header.ejs %>
+<section style="  background: linear-gradient(-45deg,#24ff72,#9a4eff);padding-top: 3%; padding-bottom: 2.5%;">
+    <div class="container">
+        <div>
+            <nav aria-label="breadcrumb" >
+                <ol class="breadcrumb" style="background: none;">
+                    <li class="breadcrumb-item" ><a href="#"style="color: white!important;" >Home</a></li>
+                    <li class="breadcrumb-item" ><a href="#"style="color: white!important;">Profile</a></li>
+
+                </ol>
+            </nav>
+            <h1 style="padding-left: 1.5%;color: white;"><%=user.displayName%>'s Profile</h1>
+        </div>
+    </div>
+</section>
+<div style="  -webkit-box-shadow: 0 3px 10px rgba(121, 135, 150, 0.1);
+    box-shadow: 0 3px 10px rgba(121, 135, 150, 0.1);padding-bottom: 2%;">
+    <div class="container">
+        <div class="row" >
+            <div class="col-12">
+                <ul class="profile-list">
+                    <li class="profile-listItem">
+                        <a  href="/profile"><i class="fas fa-user"></i> Profile</a>
+                    </li>
+                    <li class="profile-listItem">
+                        <a href="/ads"><i class="fab fa-adversal"></i> My Ads</a>
+                    </li>
+
+                    <li class="profile-listItem">
+                        <a href="/ad-favourite"><i class="far fa-bookmark"></i>  Favourite Ads <span style="color: #925af5;"> </span></a>
+                    </li>
+                    <li class="profile-listItem">
+                        <a href="/ad-done"><i class="far fa-file-archive"></i> Archeved Ads <span style="color: #925af5;"> </span></a>
+                    </li>
+                    <li class="profile-listItem">
+                        <a href="/ad-pending"><i class="fa fa-bolt"></i> Pending Approval<span style="color: #925af5;"> </span></a>
+                    </li>
+                    <li class="profile-listItem">
+                        <a class="open-password-form" href="/password"><i class="fas fa-lock"></i> Change Password</a>
+                    </li>
+                    <li class="profile-listItem">
+                        <a href="/logout"><i class="fa fa-cog"></i> Logout</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<section class="dashboard section">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Row Start -->
+        <div class="row" style=" padding:3% 1% 3% 1%;box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);margin-bottom: 5%">
+            <div class="col-12">
+                <h1 class="widget-header user" style="text-align: center;"><%=user.displayName%>'s Offers</h1>
+                <h3 style="text-align: center;">AD Name: <strong  style="color: blue"> <%=listing.name%></strong> </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <!-- Recently Favorited -->
+                <table class="table " style="box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);">
+                    <thead>
+                    <tr style="background: #ededed;">
+                        <th>User</th>
+                        <th>Price</th>
+                        <th >Offer Time</th>
+                        <th >Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%for (let i =0;i<listing.offer.length;i++){%>
+                    <tr>
+                        <td style="width:15%">
+
+                            <img width="50px" height="auto" style="border-radius: 50%" src="../images/user/<%=listing.offer[i].userAvatar%>" alt="image description">
+                            <p><%=listing.offer[i].username%></p>
+                        </td>
+
+                        <td class="product-details">
+                            <h3 class="title"> $<%=listing.offer[i].price%></h3>
+                            <p>AD Price: <strong>$<%=listing.price%></strong></p>
+
+                        </td>
+                        <td class="product-category<%=i%>"><p><%=date.format(listing.offer[i].offerDate,'YYYY/MM/DD HH:mm:ss')%></p>
+                            <a href="#!" class="eric-message"style="color: #4a80ff"> </i>Message <i class="fas fa-comment"></i> </a>
+                        </td>
+
+                        <td class="action" data-title="Action" >
+                            <a href="/<%=listing._id%>/<%=listing.offer[i]._id%>/offers/delete%>" style="color:#fa4646;font-size: 1.5rem;padding-right: 10%">   <i class="fas fa-times"></i></a>
+                            <a href="/<%=listing._id%>/<%=i%>/offers/accept%>" style="color:#2ecd2e;font-size: 1.5rem;"> <i class="fas fa-check"></i></a>
+
+                        </td>
+                    </tr>
+                    <tr class='message-body<%=i%>' style="display: none;">
+                        <td style=" padding-bottom:8%;">Message</td>
+                        <td colspan="3">
+                            <p><%=listing.offer[i].message%></p>
+                        </td>
+                    </tr>
+                    <%}%>
+                    </tbody>
+                </table>
+            </div>
+            <!--<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">-->
+                <!--<div class="sidebar">-->
+                    <!--&lt;!&ndash; User Widget &ndash;&gt;-->
+                    <!--<div class="widget user-dashboard-profile">-->
+                        <!--&lt;!&ndash; User Image &ndash;&gt;-->
+                        <!--<div class="profile-thumb" >-->
+                            <!--<%if(user.avatar){%>-->
+                            <!--<img id="blah" src="../images/user/<%=user.avatar%>" class="rounded-circle">-->
+                            <!--<%}else{%>-->
+                            <!--<img id="blah" src="../images/user/avatar-tobuy.jpg" class="rounded-circle">-->
+                            <!--<%}%>-->
+                        <!--</div>-->
+                        <!--<form method="post" action="/userAvatar"  enctype="multipart/form-data">-->
+                            <!--<input type="file"  class=" form-control-file d-inline" name="avatar" id="avatar" style="visibility: hidden;position: absolute;" >-->
+                            <!--&lt;!&ndash;<input type="hidden" class="eric-blog-input" name="avatar"  />&ndash;&gt;-->
+                            <!--&lt;!&ndash; User Name &ndash;&gt;-->
+                            <!--<h5 class="text-center"><%=user.displayName%></h5>-->
+                            <!--<p>Joined July 06, 2019</p>-->
+                            <!--<a class="btn btn-main-sm" id="eric-file-input">Add Image</a>-->
+                            <!--<button class="btn btn-main-outline-sm">Save</button>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; Dashboard Links &ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
+</section>
+
+<% include shared/footer.ejs %>

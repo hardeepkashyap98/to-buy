@@ -1,0 +1,133 @@
+<% include  shared/header.ejs %>
+<section style="  background: linear-gradient(-45deg,#24ff72,#9a4eff);padding-top: 3%; padding-bottom: 2.5%;">
+    <div class="container">
+        <div>
+            <nav aria-label="breadcrumb" >
+                <ol class="breadcrumb" style="background: none;">
+                    <li class="breadcrumb-item" ><a href="#"style="color: white!important;" >Home</a></li>
+                    <li class="breadcrumb-item" ><a href="#"style="color: white!important;">Profile</a></li>
+
+                </ol>
+            </nav>
+            <h1 style="padding-left: 1.5%;color: white;"><%=seller.displayName%>'s Collections</h1>
+        </div>
+    </div>
+</section>
+
+<section class="dashboard section">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Row Start -->
+        <%if(success && success.length>0){%>
+        <div class="alert alert-success" role="alert">
+            <%=success%>
+        </div>
+        <%}%>
+        <div class="row" style=" padding:3% 1% 3% 1%;box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);margin-bottom: 5%">
+            <div class="col-12">
+                <%if(seller.avatar){%>
+                <div class="text-center">
+                <h1 class="widget-header user" style="text-align: center;"><img width="80px" style="border-radius: 50%" height="auto" src="../images/user/<%=seller.avatar%>" alt="image description"><span style="color: #e95628"><%=seller.displayName%></span>  Collections<span class="badge badge-danger">  <%=listings.length%></span></h1>
+                <a class="btn btn-main-sm text-center"data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"> Contact Me</a>
+
+                </div>
+                <%}else{%>
+                <div class="text-center">
+                    <h1 class="widget-header user" style="text-align: center;"><img width="80px" style="border-radius: 50%" height="auto" src="../images/user/avatar-tobuy.jpg" alt="image description">  Collections <span class="badge badge-danger"> <%=listings.length%> </span></h1>
+                    <a class="btn btn-main-sm text-center"data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"> Contact Me</a>
+                </div>
+
+                <%}%>
+            </div>
+        </div>
+        <%for (let i=0;i<listings.length;i++ ) {%>
+        <%if(listings[i].active){%>
+        <div class="row" style="box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);margin-bottom: 5%">
+            <div class="col-lg-4 col-sm-12" style="height:360px; overflow: hidden">
+               <a href="/<%=listings[i]._id%>/listingDetails"><img src="../images/user/<%=listings[i].image%>" style="width: 100%"> </a>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <p>
+                    <%-listings[i].description%>
+                </p>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <h5 style="border-bottom: 1px solid #ebebeb;margin-top: 5%; ">Name：<p style="float: right;color: black"><%=listings[i].name%> </p></h5>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Original Price：<p style="float: right;color: black"><%=listings[i].price%></p></h5>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Sell Price ：<p style="float: right;color: black"><%=listings[i].SellPrice%></p></h5>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Condition：<p style="float: right;color: black"><%=listings[i].condition%></p></h5>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Brand：<p style="float: right;color: black"><%=listings[i].Brand%></p></h5>
+                <% if(listings[i].active){%>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Active ：<span style="float: right;color:#0a8f52;">Yes</span></h5>
+                <%}else {%>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Active ：<span style="float: right;color: #a6a6a6">No</span></h5>
+                <%}%>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Category：<p style="float: right;color: black"><%=listings[i].category%></p></h5>
+                <h5 style="margin-bottom: 2%">Post Date：<p style="float: right;color: black"><%=date.format(listings[i].timeStamp,'YYYY/MM/DD HH:mm:ss')%></p></h5>
+            </div>
+        </div>
+        <%}else {%>
+        <div class="row" style="box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);margin-bottom: 5%">
+            <div class="col-lg-4 col-sm-12" style="height:360px; overflow: hidden">
+               <img src="../images/user/<%=listings[i].image%>" style="width: 100%">
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <p>
+                    <%-listings[i].description%>
+                </p>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <h5 style="border-bottom: 1px solid #ebebeb;margin-top: 5%; ">Name：<p style="float: right;color: black"><%=listings[i].name%> </p></h5>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Original Price：<p style="float: right;color: black"><%=listings[i].price%></p></h5>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Sell Price ：<p style="float: right;color: black"><%=listings[i].SellPrice%></p></h5>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Condition：<p style="float: right;color: black"><%=listings[i].condition%></p></h5>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Brand：<p style="float: right;color: black"><%=listings[i].Brand%></p></h5>
+                <% if(listings[i].active){%>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Active ：<span style="float: right;color:#0a8f52;">Yes</span></h5>
+                <%}else {%>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Active ：<span style="float: right;color: #a6a6a6">No</span></h5>
+                <%}%>
+                <h5 style="border-bottom: 1px solid #ebebeb; ">Category：<p style="float: right;color: black"><%=listings[i].category%></p></h5>
+                <h5 style="margin-bottom: 2%">Post Date：<p style="float: right;color: black"><%=date.format(listings[i].timeStamp,'YYYY/MM/DD HH:mm:ss')%></p></h5>
+            </div>
+        </div>
+        <%}%>
+        <%}%>
+    </div>
+    <!-- Container End -->
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contact me</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" action="/<%=seller._id%>/<%=seller.username%>/contact">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Title:</label>
+                        <input type="text" name="title" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Your Email:</label>
+                        <input class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control"name="message" id="message-text"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-main-outline-sm" data-dismiss="modal">Close</button>
+                        <button class="btn btn-main-sm">Send message</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<% include shared/footer.ejs %>

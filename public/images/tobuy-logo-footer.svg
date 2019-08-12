@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="263" height="54" viewBox="0 0 463 154">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff3000;
+      }
+
+      .cls-2 {
+        font-size: 77.352px;
+        font-family: "Cooper Black";
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="256" cy="85" r="56"/>
+  <circle cx="128" cy="84" r="46"/>
+  <rect width="150" height="15"/>
+  <rect x="39" y="8" width="28" height="137"/>
+  <text id="Buy" class="cls-2" transform="translate(219.272 124.431) scale(1.491)">Buy</text>
+  <circle class="cls-3" cx="128.531" cy="84.531" r="13.375"/>
+</svg>

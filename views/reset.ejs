@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>To Buy  | <%=title%></title>
+    <!-- Custom fonts for this template-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/style.css" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/animate.css" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../javascripts/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('input#input_text, textarea#textarea1').characterCounter();
+        });
+    </script>
+</head>
+<body >
+<div class="container" style="height: 100vh;">
+    <div class="eric-center">
+        <div class="animated delay-1s  fcard eric-card-margin z-depth-5">
+            <div class="row eric-row "style="background:#2196f3;    border-radius: 10px;" >
+                <div class="col s6 eric-left-col"  style="margin:auto; ">
+                    <img style="width: 100%;margin-bottom: 2%;" src="/images/tobuy-logo.svg">
+                </div>
+                <div class="col s6 eric-right-col"style="background:white;      border-radius: 0 10px 10px 0;"  >
+                    <h2 style="margin: 0; font-weight: bold;">Welcome to Like Buy</h2>
+                    <%if(error && error.length > 0){%>
+                    <div class=" flash_message" role="alert">
+                        <p class="chip chip_message_alert  waves-effect" style=" margin: 0 0 2% 0;color: white;height: auto;" ><%=error%> <i class="close material-icons">close</i></p>
+                    </div>
+                    <%}%>
+                    <form method="post" class="user">
+                        <div class="input-field ">
+                            <i class="material-icons prefix icon-blue ">remove_red_eye</i>
+                            <input id="password" type="password" name="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix icon-blue ">remove_red_eye</i>
+                            <input id="comfirm" type="password" name="confirm" class="validate">
+                            <label for="comfirm">Comfirm</label>
+                        </div>
+                        <button style="width:60%;margin-bottom: 1rem;padding: 0;" class="btn waves-effect waves-light btn-large blue">
+                            Reset
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
